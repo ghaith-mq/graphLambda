@@ -34,9 +34,9 @@ We provide the implementation of the MegaDTA model in Pytorch and Pytorch Geomer
 ![alt text](https://github.com/ghaith-mq/MegaDTA/blob/main/results/correlation_plots_casf.png)
 
 - **QSAR_HiQ_NRC** Benchmark:
-  -**Set1**:
+  - **Set1**:
 ![alt text](https://github.com/ghaith-mq/MegaDTA/blob/main/results/cor_plots_csar1.png)
-  -**Set2**:
+  - **Set2**:
 ![alt text](https://github.com/ghaith-mq/MegaDTA/blob/main/results/cor_plots_csar2.png)
 
 ## License:
