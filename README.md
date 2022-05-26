@@ -2,7 +2,7 @@
 Implementation of MegaDTA, A deep learning model to score the binding affinity of protein-lignad complexes in PyTorch and PyTorch Geometric.
 ![alt text](https://github.com/ghaith-mq/MegaDTA/blob/main/MegaDTA.png)
 
-##Overview
+## Overview
 
 We provide the implementation of the MegaDTA model in Pytorch and Pytorch Geomertic frameworks, along with the scripts that can be used to train the model and also replicate the results. The repository is orignaized as follows:
 
@@ -29,7 +29,7 @@ We provide the implementation of the MegaDTA model in Pytorch and Pytorch Geomer
   -`K_fold_trainer.py` : A function that carries on the model training and validation given the generated train/validation sets by `Educated_split.py`. 
 
 
-##Results:
+## Results:
 - **CASF16** Benchmark:
 ![alt text](https://github.com/ghaith-mq/MegaDTA/blob/main/results/correlation_plots_casf.png)
 
@@ -39,7 +39,8 @@ We provide the implementation of the MegaDTA model in Pytorch and Pytorch Geomer
   -**Set2**:
 ![alt text](https://github.com/ghaith-mq/MegaDTA/blob/main/results/cor_plots_csar2.png)
 
-
+## License:
+ <font size = "4" > MIT </font>
 
 
 
