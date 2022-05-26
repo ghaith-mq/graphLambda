@@ -20,13 +20,13 @@ We provide the implementation of the MegaDTA model in Pytorch and Pytorch Geomer
 
 
 - `utls` contains: 
-  -`remove_water.py`: This script removes water molecules from the PDB complexes.
-  -`BPS_features.py` : A function that computes BPS features for the training set (**refined_set**) and test sets (**CASF16**)(**QSAR_NRC_HiQ**).
+  - `remove_water.py`: This script removes water molecules from the PDB complexes.
+  - `BPS_features.py` : A function that computes BPS features for the training set (**refined_set**) and test sets (**CASF16**)(**QSAR_NRC_HiQ**).
   - `get_amino_resideus.py` : This script retruns the AA residues sequence that exist in the binding site for each complex. 
   - `PPS.py`, `LLS.py`and `CCS.py` : Scripts to compute protein-protein structural similarity, ligand-ligand fingerprints similarity and complex-complex interaction similarity respectively.
   - `Educated_split.py` : A function that clusterizes the data using **Agglomerative Clustering** and generate the train/validation sets  according to the pre-computed similarity metrics, given the paorwise similarity results as **csv** file.
-  -`train_test.py`: Train, validate and test functions for the model.
-  -`K_fold_trainer.py` : A function that carries on the model training and validation given the generated train/validation sets by `Educated_split.py`. 
+  - `train_test.py`: Train, validate and test functions for the model.
+  - `K_fold_trainer.py` : A function that carries on the model training and validation given the generated train/validation sets by `Educated_split.py`. 
 
 
 ## Results:
