@@ -19,7 +19,7 @@ We provide the implementation of the MegaDTA model in Pytorch and Pytorch Geomer
   - `QSAR_set1.csv` , `QSAR_set1.csv`  and `coreset2016.csv` : **csv** files of used benchmarks containing  **PDB** codes of protein-ligand complexes with the expiremental binding affinity.
 
 
-- `utls` contains:
+- `utls` contains: 
   -`remove_water.py`: This script removes water molecules from the PDB complexes.
   -`BPS_features.py` : A function that computes BPS features for the training set (**refined_set**) and test sets (**CASF16**)(**QSAR_NRC_HiQ**).
   - `get_amino_resideus.py` : This script retruns the AA residues sequence that exist in the binding site for each complex. 
