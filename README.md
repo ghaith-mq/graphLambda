@@ -1,5 +1,5 @@
 # MegaDTA: Binding Affinity Prediction Using Graph Neural Networks.
-Implementation of MegaDTA, a deep learning model to score the binding affinity of protein-lignad complexes in PyTorch and PyTorch Geometric.
+Implementation of MegaDTA, a deep learning model to score the binding affinity of protein-ligand complexes in PyTorch and PyTorch Geometric.
 ![alt text](https://github.com/ghaith-mq/MegaDTA/blob/main/MegaDTA.png)
 
 ## Overview
