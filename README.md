@@ -40,7 +40,8 @@ We provide the implementation of the MegaDTA model in [Pytorch](https://github.c
 ![alt text](https://github.com/ghaith-mq/MegaDTA/blob/main/results/cor_plots_csar2.png)
 
 ## License:
- <font size = "4" > MIT </font>
+ <font size = "7" >  MIT License </font>
+ Copyright (c) 2022 Ghaith Mqawass
 
 
 
