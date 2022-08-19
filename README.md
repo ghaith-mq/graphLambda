@@ -41,7 +41,7 @@ $ python train_model.py
 ```
 
 ## Using the model:
-- The final model can be downloaded using the link: 
+- The final model can be downloaded using the [link](https://drive.google.com/file/d/10enEuEF4UcjnIZVFLhc9x5c_ztQNgE74/view?usp=sharing) 
 - To use the model you need to :
   - Preprocess the samples using the (`remove_water.py` then `BPS_features.py`)
   - Insert the following paths in the `use.py` script: 
