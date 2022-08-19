@@ -27,7 +27,7 @@ We provide the implementation of the MegaDTA model in [Pytorch](https://github.c
   - `train_test.py`: Train, validate and test functions for the model.
   - `K_fold_trainer.py` : A function that carries on the model training and validation given the generated train/validation sets by `Educated_split.py`. 
 
-## Train the model:
+## Training the model:
 - Prepare the environment:
 
 ```sh
@@ -35,18 +35,18 @@ $ conda env create -f environment.yml
 $ source activate myenv
 $ conda env list
 ```
-- Edit  paths to the root directory of the dataset and test set and the precomputed features file (*.h). Run the training script `train_model.py`
+- Edit  paths to the root directory of the dataset and test set and the precomputed features file (*.h5). Run the training script `train_model.py`
 ```sh
 $ python train_model.py
 ```
 
-## Testing the model:
+## Using the model:
 - The final model can be downloaded using the link: 
 - To use the model you need to :
   - Preprocess the samples using the (`remove_water.py` then `BPS_features.py`)
   - Insert the following paths in the `use.py` script: 
-     - directiry where the test sample (PDB complex) is located to calculate its binding affinty.
-     - directiry of computed features file (.h) and the s
+     - directory where the test samples (PDB complexes) is located to calculate its binding affinty.
+     - directory of computed features file (*.h5) and the s
   - Run `use.py` script:
 ```sh
 $ python use.py
