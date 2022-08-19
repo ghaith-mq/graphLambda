@@ -13,7 +13,7 @@ The Dataset class. Arguments:
 2. node_features: name of precomputed BPS features saved in dd format for compression
 3. activity_csv: name of csv file containing the target variable for refined set
 
-returns data list: - First list contains the graph with node features and edges features
+returns data list: - The list contains the graph with node features and edges features
 '''
 class PDBbindDataset(InMemoryDataset):
     def __init__(self, root, node_features,activity_csv,transform=None, pre_transform=None):
