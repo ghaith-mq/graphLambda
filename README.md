@@ -28,6 +28,12 @@ We provide the implementation of the MegaDTA model in [Pytorch](https://github.c
   - `train_test.py`: Train, validate and test functions for the model.
   - `K_fold_trainer.py` : A function that carries on the model training and validation given the generated train/validation sets by `Educated_split.py`. 
 
+## Train the model:
+- Prepare the environment:
+
+```sh
+$ conda create --name myenv
+```
 
 ## Results:
 - **CASF16** Benchmark:
