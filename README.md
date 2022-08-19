@@ -13,7 +13,7 @@ We provide the implementation of the MegaDTA model in [Pytorch](https://github.c
 
 - `Data` contains:
   - `Dataset.py` : Dataset class that combines pre-computed BPS features with amino acid sequence embedding. This dataset is to be passed to the dataloader to train the model.
-  - `Edge_builder.by` : A function that builds the graph and the edges between the nodes given a molecule **sdf** format
+  - `Edge_builder.py` : A function that builds the graph and the edges between the nodes given a molecule **sdf** format
   - `data.txt` : Description of the used data and benchmark. Also links to download the data are provided.
   - `refined_data2020.csv`: A **csv** file that contains **PDB** codes of protein-ligand complexes with the expiremental binding affinity.
   - `QSAR_set1.csv` , `QSAR_set1.csv`  and `coreset2016.csv` : **csv** files of used benchmarks containing  **PDB** codes of protein-ligand complexes with the expiremental binding affinity.
