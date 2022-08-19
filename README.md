@@ -32,7 +32,7 @@ We provide the implementation of the MegaDTA model in [Pytorch](https://github.c
 - Prepare the environment:
 
 ```sh
-$ conda env create -f env.yml
+$ conda env create -f environment.yml
 $ source activate myenv
 $ conda env list
 ```
