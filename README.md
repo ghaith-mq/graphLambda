@@ -45,7 +45,7 @@ $ python train_model.py
 - To use the model you need to :
   - Preprocess the samples using the (`remove_water.py` then `BPS_features.py`)
   - Insert the following paths in the `use.py` script: 
-     - directory where the test samples (PDB complexes) is located to calculate its binding affinty.
+     - directory where the test samples (PDB complexes) is located to predict the binding affinty.
      - directory of computed features file (*.h5) and the s
   - Run `use.py` script:
 ```sh
