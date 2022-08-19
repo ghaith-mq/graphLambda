@@ -12,7 +12,7 @@ We provide the implementation of the MegaDTA model in [Pytorch](https://github.c
 
 
 - `Data` contains:
-  - `Dataset.py` : Dataset class that combines pre-computed BPS features with amino acid sequence embedding. This dataset is to be passed to the dataloader to train the model.
+  - `Dataset.py` : Dataset class that combines pre-computed BPS features. This dataset is to be passed to the dataloader to train the model.
   - `Edge_builder.py` : A function that builds the graph and the edges between the nodes given a molecule **sdf** format
   - `data.txt` : Description of the used data and benchmark. Also links to download the data are provided.
   - `refined_data2020.csv`: A **csv** file that contains **PDB** codes of protein-ligand complexes with the expiremental binding affinity.
@@ -22,7 +22,6 @@ We provide the implementation of the MegaDTA model in [Pytorch](https://github.c
 - `utls` contains: 
   - `remove_water.py`: This script removes water molecules from the PDB complexes.
   - `BPS_features.py` : A function that computes BPS features for the training set (**refined_set**) and test sets (**CASF16**)(**QSAR_NRC_HiQ**).
-  - `get_amino_resideus.py` : This script retruns the AA residues sequence that exist in the binding site for each complex. 
   - `PPS.py`, `LLS.py`and `CCS.py` : Scripts to compute protein-protein structural similarity, ligand-ligand fingerprints similarity and complex-complex interaction similarity respectively.
   - `Educated_split.py` : A function that clusterizes the data using **Agglomerative Clustering** and generate the train/validation sets  according to the pre-computed similarity metrics, given the paorwise similarity results as **csv** file.
   - `train_test.py`: Train, validate and test functions for the model.
@@ -36,7 +35,10 @@ $ conda env create -f environment.yml
 $ source activate myenv
 $ conda env list
 ```
-
+- Edit  paths to the root directory of the dataset and test set and the precomputed features file (*.h). Run the training script `train_model.py`
+```sh
+$ python train_model.py
+```
 ## Results:
 - **CASF16** Benchmark:
 ![alt text](https://github.com/ghaith-mq/MegaDTA/blob/main/results/correlation_plots_casf.png)
