@@ -43,11 +43,11 @@ $ python train_model.py
 ## Testing the model:
 - The final model can be downloaded using the link: 
 - To use the model you need to :
-1- Preprocess the samples using the (remove_water.py then BPS.py)
-2- Insert the following paths in the `use.py` script: 
-  - directiry where the test sample (PDB complex) is located to calculate its binding affinty.
-  - directiry of computed features file (.h) and the s
-3- Run `use.py` script:
+  - Preprocess the samples using the (`remove_water.py` then `BPS_features.py`)
+  - Insert the following paths in the `use.py` script: 
+     - directiry where the test sample (PDB complex) is located to calculate its binding affinty.
+     - directiry of computed features file (.h) and the s
+  - Run `use.py` script:
 ```sh
 $ python use.py
 ```
