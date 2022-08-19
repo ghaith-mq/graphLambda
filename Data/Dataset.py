@@ -37,17 +37,7 @@ class PDBbindDataset(InMemoryDataset):
     def process(self):
 
         self.node_data = dd.io.load(join(self.root, self.node_features))
-#         print(self.node_data.keys())
         # load csv with activity data and simlarity scores
-        self.activity = pd.read_csv(join(self.root, self.activity_csv))
-        self.activity=self.activity[(self.activity['PDB'] !='6n95')]
-        self.activity=self.activity[(self.activity['PDB'] !='6gwe')]
-#         if (self.activity_csv=='index/refined_data2020.csv'):
-#             print("Hiii")
-#             self.activity2=pd.read_csv('coreset2016/coreset2016.csv')
-#             for k in self.activity2['PDB']:
-#                 self.activity=self.activity[(self.activity['PDB'] != k)]
-#         self.activity.reset_index(inplace=True)
         # create lists of edges and edge descriptors 
         self.edge_indexes = {key: add_edges_list(self.root, key)[0] for key in self.activity.PDB }
         self.edge_data = {key: add_edges_list(self.root, key)[1] for key in self.activity.PDB }
