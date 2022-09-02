@@ -217,5 +217,5 @@ def test_predictions(model, loader):
 model=Net()
 model.load_state_dict(torch.load('path_to_the_downloaded_model_weights.pt'))
 preds = test_predictions(model,test_loader)
-print(predictions)
+print(preds)
 
