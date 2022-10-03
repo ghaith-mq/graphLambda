@@ -43,8 +43,7 @@ $ python train_model.py
 ## Using the model:
 - The final model can be downloaded using the [link](https://drive.google.com/file/d/1RJiA_hi6yfZP8IzH30UtnvaJvQXwjNAH/view?usp=sharing) 
 - To replicate the results you need to:
-  - Download the PDbbind refined and test sets from  http://www.pdbbind.org.cn/. Also download the CSAR test sets from [
-](http://csardock.org/)  
+  - Download the PDbbind refined and test sets from  http://www.pdbbind.org.cn/. Also download the CSAR test sets from http://csardock.org/
   - Preprocess the samples using the (`remove_water.py` then `BPS_features.py`)
   - Run `use.py` notebook after inserting the required paths to:
      - path to the refined set (only if you want to retrain the model)   
