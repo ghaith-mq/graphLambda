@@ -42,12 +42,15 @@ $ python train_model.py
 
 ## Using the model:
 - The final model can be downloaded using the [link](https://drive.google.com/file/d/1RJiA_hi6yfZP8IzH30UtnvaJvQXwjNAH/view?usp=sharing) 
-- To use the model you need to :
+- To replicate the results you need to:
+  - Download the PDbbind refined and test sets from  http://www.pdbbind.org.cn/. Also download the CSAR test sets from [
+](http://csardock.org/)  
   - Preprocess the samples using the (`remove_water.py` then `BPS_features.py`)
-  - Insert the following paths in the `use.py` script: 
+  - Run `use.py` notebook after inserting the required paths to:
+     - path to the refined set (only if you want to retrain the model)   
      - directory where the test samples (PDB complexes) are located.
-     - directory of computed features file (*.h5) 
-     - directory of a dataframe (csv_file) containing PDB codes of test samples.
+     - directory of computed features file of the test samples (*.h5) 
+     - directory of a dataframe (csv_file) containing PDB codes of the test samples.
   - Run `use.py` script:
 ```sh
 $ python use.py testset_directory testset_directory/testset.h5  testset_directory/pdb_codes.csv
