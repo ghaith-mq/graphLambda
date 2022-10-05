@@ -38,7 +38,9 @@ $ conda env list
 - The final model can be downloaded using the [link](https://drive.google.com/file/d/1RJiA_hi6yfZP8IzH30UtnvaJvQXwjNAH/view?usp=sharing) 
 - To replicate the results you need to:
   - Download the PDBbind test set "coreset" from  http://www.pdbbind.org.cn/. Also download the CSAR test sets from http://csardock.org/
-  - Preprocess the samples using the (`remove_water.py` then `BPS_features.py`)
+  - Preprocess the PDB samples using the `remove_water.py` 
+  - Generate xyz format of lignad files from existing sdf files using RDKit with the option remove H = True.
+  -  Generate features.h5 file using`BPS_features.py`.
   - Run `use.py` notebook after inserting the required paths to: 
      - directory where the test samples (PDB complexes) are located.
      - directory of computed features file of the test samples (*.h5) 
