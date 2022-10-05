@@ -1,30 +1,11 @@
-#Compute protein-protein structural similarity using TM-align
+#Compute protein-protein structural similarity using TM-align (TM-align installation is required)
 from rdkit import Chem
 import os
 from multiprocessing import Pool
-i=0
-uk=0
-visited= []
-for dir1 in os.listdir():
-	if(len(dir1)==4):
-		for file_ in os.listdir(dir1):
-			if(file_[-4:]==".txt") :
-				visited.append(dir1)
-
-lst=[]
-for dir1 in os.listdir():
-	if(len(dir1)==4):
-		if(dir1 in visited):
-			continue
-		for dir2 in os.listdir():
-			if(len(dir2)==4):
-				lst.append((dir1,dir2))
-		
-print(len(lst))
+lst = [] # A list that contains all possible pairwise combinations of PBD file names
 
 def compute(dirs):
-	print(dirs)
-	command = "~/Downloads/TMalign ./" + dirs[0] + "/" + dirs[0] +"_protein_nowater.pdb" + " ./" + dirs[1] + "/" + dirs[1] +"_protein_nowater.pdb" + " -outfmt 2 -ter 0 -split 0 -fast  >> " + dirs[0] + "/" + dirs[0] + ".txt"
+	command = "path_to_where_TM_align_is /TMalign " + dirs[0] + ".pdb " +  dirs[1]  +".pdb" + " -outfmt 2 -ter 0 -split 0 -fast  >> " + dirs[0] + "/" + dirs[0] + ".txt"
 	os.system(command)
 
 def main(): 
