@@ -1,81 +1,60 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[11]:
-
-
+# Make sure all the following libraries are installed:
 import sys
-root = str(sys.argv[1])   #path to the test_samples directory
-features_dir= str(sys.argv[2]) #path to the test samples bps_features file *.h5
-PDB_codes=str(sys.argv[3])   #path to a dataframe.csv containing column 'PDB' : PDB codes of the test samples
-
-
-# In[1]:
-
-
-import torch
-import torch_geometric
 import deepdish as dd
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import KFold
-from tqdm import tqdm
-import copy
 from os.path import join
-from rdkit import Chem
-from rdkit.Chem import ChemicalFeatures, AllChem
-from rdkit import RDConfig
 from rdkit.Chem.rdmolfiles import MolFromMolFile
 import numpy as np
 import pandas as pd
-from sklearn.cluster import AgglomerativeClustering
-import random
 import torch
+import torch_geometric
+from torch.nn import Sequential, Linear, ReLU, BatchNorm1d, Dropout
 import torch.nn.functional as F
-from torch.nn import Sequential, Linear, ReLU, GRU, BatchNorm1d, Dropout
-import torch_geometric.transforms as T
-from torch_geometric.nn import NNConv, Set2Set, GCNConv, global_add_pool, global_mean_pool,GATConv,GINConv
+from torch_geometric.nn import  GCNConv, global_add_pool,GATConv,GINConv
 from torch.nn import Sequential, Linear, ReLU
-from torch_geometric.data import DataLoader
 from torch_geometric.utils import remove_self_loops
 from torch_geometric.data import Data
-from torch_geometric.data import InMemoryDataset #easily fits into cpu memory
+from torch_geometric.data import InMemoryDataset
 
-
-# In[2]:
-
+root = str(sys.argv[1])        #path to the test_samples directory
+features_dir= str(sys.argv[2]) #path to the test samples bps_features file *.h5 
+PDB_codes=str(sys.argv[3])     #path to a dataframe.csv containing column 'PDB' : PDB codes of the test samples,
+model_path=str(sys.argv[4])    #path_to_the_downloaded_model_weights *.pt
 
 def add_edges_list(root, pdb_code):
+    '''
+    This function builds edge index list and edge attributes given the directory of ligand.sdf 
+    Input: 
+    - root: path to the directory containing ligand samples
+    - pdb_code: A list of PDB codes of complexes that contain these lignads
+    Output:
+    - edge list: numpy array of shape (2, num_edges) 
+    '''
     ligand_filename = pdb_code + ".sdf"   #note: you need to delete hydrogen atoms from the ligand file
-#     print(join(root, code, ligand_filename))
     m = MolFromMolFile(join(root, pdb_code, ligand_filename))
     atoms1 = [b.GetBeginAtomIdx() for b in m.GetBonds()]
     atoms2 = [b.GetEndAtomIdx() for b in m.GetBonds()]    
-    # Edge attributes: distance; SINGLE; DOUBLE; TRIPLE; AROMATIC.
-    edge_weights= []
-    coords = m.GetConformers()[0].GetPositions()  # Get a const reference to the vector of atom positions
-    for b in m.GetBonds():
-        if str(b.GetBondType()) == "SINGLE":
-            edge_weights.append(1)
-        elif str(b.GetBondType()) == "DOUBLE":
-            edge_weights.append(2)
-        elif str(b.GetBondType()) == "TRIPLE":
-            edge_weights.append(3)
-        else:
-            edge_weights.append(4)
-    edge_features = np.array(edge_weights) 
     # since the torch-geometric graphs are directed add reverse direction of edges
-    return np.array([atoms1 + atoms2, atoms2 + atoms1]), np.concatenate((edge_features, edge_features), 0)
-
-
-# In[3]:
-
+    edge_list = np.array([atoms1 + atoms2, atoms2 + atoms1])
+    return edge_list
 
 class PDBbindDataset(InMemoryDataset):
-    def __init__(self, root, node_features,transform=None, pre_transform=None):
+    '''
+    Dataset class that will transform test samples to a test dataset containing all samples 
+    '''
+    def __init__(self, root, node_features,activity):
+        '''
+        root: path to data
+        node_features: path to *.h5 file that contains the descriptors computed in the previous step 
+        avtivity: Path to *.csv file that contains the PDB codes of test complexes
+        
+        '''
         self.root = root
         self.node_features = node_features
         self.activity_csv = activity_csv
-        super(PDBbindDataset, self).__init__(root, transform, pre_transform)
+        super(PDBbindDataset, self).__init__(root)
         self.data, self.slices = torch.load(self.processed_paths[0])
 
     @property
@@ -92,7 +71,6 @@ class PDBbindDataset(InMemoryDataset):
     def process(self):
 
         self.node_data = dd.io.load(join(self.root, self.node_features))
-#         print(self.node_data.keys())
         # load csv with activity data and simlarity scores
         self.activity = pd.read_csv(join(self.root, self.activity_csv))
         # create lists of edges and edge descriptors 
@@ -115,19 +93,8 @@ class PDBbindDataset(InMemoryDataset):
         torch.save((data, slices), self.processed_paths[0])
 
 
-# In[10]:
 
-
-test_samples = PDBbindDataset(root, 
-                         ,features_dir,
-                         PDB_codes)
-test_loader = DataLoader(test_samples, batch_size=1, shuffle=False)
-
-
-# In[7]:
-
-
-class Net(torch.nn.Module):
+class MegaDTA(torch.nn.Module):
     def __init__(self):
         super(Net, self).__init__()
         #GCN-representation
@@ -156,7 +123,9 @@ class Net(torch.nn.Module):
         self.bn23 = BatchNorm1d(64)
         #Fully connected layers for concatinating outputs
         self.fc1=Linear(128*4 + 64, 256)
+        self.dropout1=Dropout(p=0.2,)
         self.fc2=Linear(256, 64)
+        self.dropout2=Dropout(p=0.2,)
         self.fc3=Linear(64, 1)
     def forward(self, data):
         x, edge_index = data.x, data.edge_index
@@ -189,33 +158,36 @@ class Net(torch.nn.Module):
         #Concatinating_representations
         cr=torch.cat((x,y,z),1)
         cr = F.relu(self.fc1(cr))
-        cr = F.dropout(cr, p=0.2, training=self.training)
+        cr = self.dropout1(cr)
         cr = F.relu(self.fc2(cr))
-        cr = F.dropout(cr, p=0.2, training=self.training)
+        cr = self.dropout2(cr)
         cr = self.fc3(cr)
         cr = F.relu(cr).view(-1)
         return cr  
 
-
-# In[4]:
-
-
+test_samples = PDBbindDataset(root, 
+                         ,features_dir,
+                         PDB_codes)
+test_loader = DataLoader(test_samples, batch_size=1, shuffle=False)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+
 @torch.no_grad()
 def test_predictions(model, loader):
+    '''
+    This function returns the predicted affinity of the test samples contained in the test data loader;
+    Input:
+    - model: MegaDTA model
+    -loader: Test loader
+    '''
     model.eval()
     pred = []
     for data in loader:
         data = data.to(device)
         pred += model(data).detach().cpu().numpy().tolist()
-    return pred, true
+    return pred
 
-
-# In[13]:
-
-
-model=Net()
-model.load_state_dict(torch.load('path_to_the_downloaded_model_weights.pt'))
+model= MegaDTA()
+model.load_state_dict(torch.load(model_path))
 preds = test_predictions(model,test_loader)
 print(preds)
-
