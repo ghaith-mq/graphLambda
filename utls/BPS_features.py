@@ -8,7 +8,11 @@ import os
 import deepdish as dd
 from tqdm import tqdm
 from multiprocessing import Pool
-
+'''
+Before runnning the script:
+1- make sure you have the lignads saved in .xyz format with removing Hydrogens option
+2- Specify the correct paths to lignads and complexes.pdb in the function (compute)
+'''
 Mol = namedtuple('Mol', ['symbols', 'coords', 'message'])
 idk=0
 #symbols is a list of atomic name to be met in the pdb
@@ -163,12 +167,9 @@ def BP_function(mol, pdb, rc = 16.0, rs_list = [2., 4., 6., 8., 10.], eta_list =
 
 def compute(pdb_id):
     global idk
-    mol = read_xyz("./" + pdb_id + "/" + pdb_id + ".xyz")
-    pdb = read_pdb("./" + pdb_id + "/" + pdb_id + "_nowaterr.pdb")
-    print("before BP function:" ,pdb_id)
+    mol = read_xyz("./" + pdb_id + "/" + pdb_id + ".xyz")  #specify the paths to lignads saved in .xyz format 
+    pdb = read_pdb("./" + pdb_id + "/" + pdb_id + "_nowaterr.pdb") #Specify the paths to proteins contained in files: complex_code.pdb 
     out = BP_function(mol, pdb)
-    print(idk)
-    print("After BP function:" ,pdb_id)
     return pdb_id, out
 
 
@@ -178,9 +179,6 @@ def main():
     data = p.map(compute, codes)
     print(" computation is finished")
     data = {key: value for key, value in data}
-    for k,v in data:
-    	print("key: ",k)
-
     dd.io.save('refined_set_features.h5', data)
 
 
