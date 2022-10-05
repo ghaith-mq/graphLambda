@@ -27,17 +27,12 @@ We provide the implementation of the MegaDTA model in [Pytorch](https://github.c
   - `train_test.py`: Train, validate and test functions for the model.
   - `K_fold_trainer.py` : A function that carries on the model training and validation given the generated train/validation sets by `Educated_split.py`. 
 
-## Training the model:
-- Prepare the environment:
+## Prepare the environment:
 
 ```sh
 $ conda env create -f environment.yml
 $ source activate myenv
 $ conda env list
-```
-- Edit  paths to the root directory of the dataset and test set and the precomputed features file (*.h5). Run the training script `train_model.py`
-```sh
-$ python train_model.py
 ```
 
 ## Using the model:
@@ -45,14 +40,14 @@ $ python train_model.py
 - To replicate the results you need to:
   - Download the PDbbind refined and test sets from  http://www.pdbbind.org.cn/. Also download the CSAR test sets from http://csardock.org/
   - Preprocess the samples using the (`remove_water.py` then `BPS_features.py`)
-  - Run `use.py` notebook after inserting the required paths to:
-     - path to the refined set (only if you want to retrain the model)   
+  - Run `use.py` notebook after inserting the required paths to: 
      - directory where the test samples (PDB complexes) are located.
      - directory of computed features file of the test samples (*.h5) 
      - directory of a dataframe (csv_file) containing PDB codes of the test samples.
+     - directory where the model is downloaded 
   - Run `use.py` script:
 ```sh
-$ python use.py testset_directory testset_directory/testset.h5  testset_directory/pdb_codes.csv
+$ python use.py testset_directory testset_directory/testset.h5  testset_directory/pdb_codes.csv  model_directory.pt
 ```
 ## Results:
 - **CASF16** Benchmark:
