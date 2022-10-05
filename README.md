@@ -7,7 +7,7 @@ Implementation of MegaDTA, a deep learning model to score the binding affinity o
 We provide the implementation of the MegaDTA model in [Pytorch](https://github.com/pytorch/pytorch) and [PyTorch Geometric](https://pytorch-geometric.readthedocs.io/) frameworks, along with the scripts that can be used to train the model and also replicate the results. The repository is orignaized as follows:
 
 - `models` contains:
-  - `Different_GNNs` : contains various GNN models implemented in Pytorch. All possible combinations of (GCN,GAT,GIN) are provided. 
+  -  various GNN models implemented in Pytorch. All possible combinations of (GCN,GAT,GIN) are provided. 
   - `MegaDTA.py` : The overall model implemented in Pytorch.
 
 
