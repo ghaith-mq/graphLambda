@@ -22,10 +22,7 @@ We provide the implementation of the MegaDTA model in [Pytorch](https://github.c
 - `utls` contains: 
   - `remove_water.py`: This script removes water molecules from the PDB complexes.
   - `BPS_features.py` : A function that computes BPS features for the training set (**refined_set**) and test sets (**CASF16**)(**QSAR_NRC_HiQ**).
-  - `Educated_split.py` : A function that clusterizes the data using **Agglomerative Clustering** and generate the train/validation sets  according to the pre-computed similarity metrics, given the pairwise similarity results between all complexes as **csv** file.
-  - `train_test.py`: Train, validate and test functions for the model.
-  - `K_fold_trainer.py` : A function that carries on the model training and validation given the generated train/validation sets by `Educated_split.py`. 
-
+ 
 ## Prepare the environment:
 
 ```sh
@@ -41,7 +38,8 @@ $ conda env list
   - Preprocess the PDB samples using the `remove_water.py` 
   - Generate xyz format of lignad files from existing sdf files using RDKit with the option remove H = True.
   -  Generate features.h5 file using`BPS_features.py`.
-  - Run `use.py` notebook after inserting the required paths to: 
+  -  To train the model, follow the steps in the training_notebook.
+  - To use the model in inference mode run `use.py` passing the following arguments: 
      - directory where the test samples (PDB complexes) are located.
      - directory of computed features file of the test samples (*.h5) 
      - directory of a dataframe (csv_file) containing PDB codes of the test samples.
