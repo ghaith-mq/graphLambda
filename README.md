@@ -33,12 +33,11 @@ $ conda env list
 ## Using the model:
 - The final model can be downloaded using the [link](https://drive.google.com/file/d/1RJiA_hi6yfZP8IzH30UtnvaJvQXwjNAH/view?usp=sharing) 
 - To replicate the results you need to:
-  - Download the PDBbind test set "coreset" from  http://www.pdbbind.org.cn/. Also download the CSAR test sets from http://csardock.org/
+  - Download the testset "coreset" from  [link](https://drive.google.com/file/d/1RQ3dR0CmDiIIQDkOZ_0LdlF8yfgALF6s/view?usp=sharing). The directory contains the coreset from PDBbind with BPS features precomputed using BPS.py and stored in*.h5 file. You need to load paths to this directory and *.h5 file and coreset2016.csv file in the notebook MegaDTA-Use. Some preprcessing was already carried out to the original data :  
   - Preprocess the PDB samples using the `remove_water.py` 
   - Generate xyz format of lignad files from existing sdf files using RDKit with the option remove H = True.
   -  Generate features.h5 file using`BPS_features.py`.
-  -  To train the model, follow the steps in the training_notebook.
-  - To use the model in inference mode run `use.py` passing the following arguments: 
+  - To use the model in inference mode run `MegaDTA-Use.ipynb` passing the following arguments: 
      - directory where the test samples (PDB complexes) are located.
      - directory of computed features file of the test samples (*.h5) 
      - directory of a dataframe (csv_file) containing PDB codes of the test samples.
