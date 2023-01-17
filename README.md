@@ -18,9 +18,7 @@ We provide the implementation of the MegaDTA model in [Pytorch](https://github.c
   - `QSAR_set1.csv` , `QSAR_set1.csv`  and `coreset2016.csv` : **csv** files of used benchmarks containing  **PDB** codes of protein-ligand complexes with the expiremental binding affinity.
 
 
-- `utls` contains: 
-  - `remove_water.py`: This script removes water molecules from the PDB complexes.
-  - `BPS_features.py` : A function that computes BPS features for the training set (**refined_set**) and test sets (**CASF16**)(**QSAR_NRC_HiQ**).
+- `BPS_features.py` : A python script that computes BPS features. 
  
 ## Prepare the environment:
 
@@ -31,21 +29,17 @@ $ conda env list
 ```
 
 ## Using the model:
-- The final model can be downloaded using the [link](https://drive.google.com/file/d/1RJiA_hi6yfZP8IzH30UtnvaJvQXwjNAH/view?usp=sharing) 
+- The final models can be downloaded using the [link](https://drive.google.com/file/d/1RJiA_hi6yfZP8IzH30UtnvaJvQXwjNAH/view?usp=sharing) 
 - To replicate the results you need to:
-  - Download the testset "coreset" from  [link](https://drive.google.com/file/d/1RQ3dR0CmDiIIQDkOZ_0LdlF8yfgALF6s/view?usp=sharing). The directory contains the coreset from PDBbind with BPS features precomputed using BPS.py and stored in*.h5 file. You need to load paths to this directory and *.h5 file and coreset2016.csv file in the notebook MegaDTA-Use. Some preprcessing was already carried out to the original data :  
-  - Preprocess the PDB samples using the `remove_water.py` 
-  - Generate xyz format of lignad files from existing sdf files using RDKit with the option remove H = True.
-  -  Generate features.h5 file using`BPS_features.py`.
-  - To use the model in inference mode run `MegaDTA-Use.ipynb` passing the following arguments: 
+  - Download the testset "coreset" from  [link](https://drive.google.com/file/d/1RQ3dR0CmDiIIQDkOZ_0LdlF8yfgALF6s/view?usp=sharing) and place it in the same directory of the notebook. The downloaded folder contains the coreset from PDBbind with BPS features precomputed using `BPS_features.py` and stored `*.h5 file` . You need to load paths to the work directory and *.h5 file and coreset2016.csv file in the notebook MegaDTA-Use. Some preprcessing was already carried out to the original data :  
+  - Preprocessed the PDB samples by removing water molecules. 
+  - Generated xyz format of lignad files from existing sdf files using RDKit with the option remove H = True.
+  - Generated features.h5 file using`BPS_features.py`.
+  To use the model run `MegaDTA-Use.ipynb` and inside the notebook you should pass the following arguments: 
      - directory where the test samples (PDB complexes) are located.
      - directory of computed features file of the test samples (*.h5) 
      - directory of a dataframe (csv_file) containing PDB codes of the test samples.
      - directory where the model is downloaded 
-  - Run `use.py` script:
-```sh
-$ python use.py testset_directory testset_directory/testset.h5  testset_directory/pdb_codes.csv  model_directory.pt
-```
 ## Results:
 - **CASF16** Benchmark:
 ![alt text](https://github.com/ghaith-mq/MegaDTA/blob/main/results/correlation_plots_casf.png)
