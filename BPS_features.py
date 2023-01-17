@@ -10,8 +10,9 @@ from tqdm import tqdm
 from multiprocessing import Pool
 '''
 Before runnning the script:
-1- make sure you have the lignads saved in .xyz format with removing Hydrogens option
-2- Specify the correct paths to lignads and complexes.pdb in the function (compute)
+1- make sure you have the lignads saved in .xyz format with Hydrogen atoms removed
+2- Remove water molecules from the PDB files.
+3- Specify the correct paths to lignads and complexes.pdb in the function (compute)
 '''
 Mol = namedtuple('Mol', ['symbols', 'coords', 'message'])
 idk=0
