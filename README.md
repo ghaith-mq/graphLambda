@@ -40,15 +40,6 @@ $ conda env list
      - directory of computed features file of the test samples (*.h5) 
      - directory of a dataframe (csv_file) containing PDB codes of the test samples.
      - directory where the model is downloaded 
-## Results:
-- **CASF16** Benchmark:
-![alt text](https://github.com/ghaith-mq/MegaDTA/blob/main/results/correlation_plots_casf.png)
-
-- **QSAR_HiQ_NRC** Benchmark:
-  - **Set1**:
-![alt text](https://github.com/ghaith-mq/MegaDTA/blob/main/results/cor_plots_csar1.png)
-  - **Set2**:
-![alt text](https://github.com/ghaith-mq/MegaDTA/blob/main/results/cor_plots_csar2.png)
 
 ## License:
  <font size = "7" >  MIT License </font>
