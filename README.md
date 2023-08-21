@@ -27,19 +27,17 @@ $ conda env create -f environment.yml
 $ source activate myenv
 $ conda env list
 ```
-
+## Training the model:
+- Download the refined set from the official website of PDBBind [link](http://www.pdbbind.org.cn/index.php)
+- Compute BPS features using `BPS_features.py` (Or you can download precalculated features along with train/validation ids from the [link](https://drive.google.com/drive/folders/16lFWTAxeTsjRjnb1DGIjUtsoBeY2scLo?usp=sharing))
+- In the directory "refined_set" place the downloaded "refined_set.h5" file and then run the notebook `graphLmbda_train.ipynb`
 ## Using the model:
-- The final models can be downloaded using the [link](https://drive.google.com/file/d/1RJiA_hi6yfZP8IzH30UtnvaJvQXwjNAH/view?usp=sharing) 
+- The final models can be downloaded using the [link](https://drive.google.com/file/d/1_ljWU2Ma-eyNVYG5VBtlTCdUzYVMrYn-/view?usp=sharing) 
 - To replicate the results you need to:
-  - Download the testset "coreset" from  [link](https://drive.google.com/file/d/1RQ3dR0CmDiIIQDkOZ_0LdlF8yfgALF6s/view?usp=sharing) and place it in the same directory of the notebook. The downloaded folder contains the coreset from PDBbind with BPS features precomputed using `BPS_features.py` and stored `*.h5 file` . You need to load paths to the work directory and *.h5 file and coreset2016.csv file in the notebook graphLambda-Use. Some preprcessing was already carried out to the original data :  
+  - Download the testset "coreset" from  [link](https://drive.google.com/file/d/1RQ3dR0CmDiIIQDkOZ_0LdlF8yfgALF6s/view?usp=sharing) and place it in the same directory of the notebook. The downloaded folder contains the coreset from PDBbind with BPS features precomputed using `BPS_features.py` and stored `*.h5 file` . You need to load paths to the work directory and *.h5 file and coreset2016.csv file in the notebook graphLambda_train. Some preprcessing was already carried out to the original data :  
   - Preprocessed the PDB samples by removing water molecules. 
-  - Generated xyz format of lignad files from existing sdf files using RDKit with the option remove H = True.
-  - Generated features.h5 file using`BPS_features.py`.
-  To use the model run `graphLambda-Use.ipynb` and inside the notebook you should pass the following arguments: 
-     - directory where the test samples (PDB complexes) are located.
-     - directory of computed features file of the test samples (*.h5) 
-     - directory of a dataframe (csv_file) containing PDB codes of the test samples.
-     - directory where the model is downloaded 
+  - Generated bps_features.h5 file using`BPS_features.py`.
+  For inference you can use the script  `graphLambda_inference.py`. An example of how to use it in inference is provided in the `CACHE_Challenge` directory.
 
 ## License:
  <font size = "7" >  MIT License </font>
