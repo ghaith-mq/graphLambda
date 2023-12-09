@@ -4,7 +4,7 @@ Implementation of graphLambda, a deep learning model to score the binding affini
 
 ## Overview
 
-We provide the implementation of the graphLambda model in [Pytorch](https://github.com/pytorch/pytorch) and [PyTorch Geometric](https://pytorch-geometric.readthedocs.io/) frameworks, along with the scripts that can be used to train the model and also replicate the results. The repository is orignaized as follows:
+We provide the implementation of the graphLambda model in [Pytorch](https://github.com/pytorch/pytorch) and [PyTorch Geometric](https://pytorch-geometric.readthedocs.io/) frameworks, along with the scripts that can be used to train the model and also replicate the results. All data used in this work can be downloaded from the [data_link](https://drive.google.com/drive/folders/1SYPxp2RqG68Q8cUWDVKL4wkeSM_RG3_z?usp=sharing) The repository is orignaized as follows:
 
 - `models` contains:
   -  various GNN models implemented in Pytorch. All possible combinations of (GCN,GAT,GIN) are provided. 
